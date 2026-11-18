@@ -98,6 +98,9 @@
     }
   }
 
+  // Let other scripts (pranks.js) trigger a leaf shower.
+  window.menuEffects = { dropLeaves };
+
   // First open (once per visit; reloading the same tab won't replay it).
   let alreadyShown = false;
   try {

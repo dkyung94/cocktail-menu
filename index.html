@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="menu.js" defer></script>
   <script src="effects.js" defer></script>
-  <script src="bartender.js" defer></script>
+  <script src="pranks.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -39,17 +39,41 @@
 
   <footer class="site-footer">
     <p data-i18n="footer">Cheers! 🥂</p>
-    <button type="button" class="bartender-btn" id="bartender-btn">
-      <span class="bell" aria-hidden="true">🛎️</span>
-      <span class="bartender-label" data-i18n="bartenderButton">Request Bartender</span>
-    </button>
+    <div class="footer-actions">
+      <button type="button" class="footer-btn" id="bartender-btn">
+        <span class="bell" aria-hidden="true">🛎️</span>
+        <span class="footer-btn-label" data-i18n="bartenderButton">Request Bartender</span>
+      </button>
+      <button type="button" class="footer-btn" id="tab-btn">
+        <span aria-hidden="true">🧾</span>
+        <span class="footer-btn-label" data-i18n="payTabButton">Pay Tab</span>
+      </button>
+    </div>
   </footer>
 
-  <dialog class="bartender-dialog" id="bartender-dialog" aria-labelledby="bartender-title">
-    <div class="bartender-emoji" aria-hidden="true">👆</div>
+  <!-- Prank modals (behavior in pranks.js, text in the UI object in menu.js) -->
+  <dialog class="gag-dialog shake" id="bartender-dialog" aria-labelledby="bartender-title">
+    <div class="gag-emoji hop" aria-hidden="true">👆</div>
     <h2 id="bartender-title" data-i18n="bartenderTitle">Go up yourself bro</h2>
-    <p class="bartender-sub" data-i18n="bartenderSub">The bartender is off the clock.</p>
-    <button type="button" class="bartender-close" id="bartender-close" data-i18n="bartenderClose">Fine 🙄</button>
+    <p class="gag-sub" data-i18n="bartenderSub">Don't be shy</p>
+    <button type="button" class="gag-close" id="bartender-close" data-i18n="bartenderClose">Fine 🙄</button>
+  </dialog>
+
+  <dialog class="receipt-dialog" id="receipt-dialog" aria-labelledby="receipt-title">
+    <div class="receipt">
+      <button type="button" class="receipt-x" id="receipt-x" aria-label="Close" data-i18n-aria="close">✕</button>
+      <div id="receipt-body"></div>
+      <div class="receipt-pay">
+        <button type="button" class="pay-btn pay-apple" data-i18n="payApple">Apple Pay</button>
+        <button type="button" class="pay-btn pay-cash" data-i18n="payCash">Pay with Cash</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="gag-dialog" id="jk-dialog" aria-labelledby="jk-title">
+    <div class="gag-emoji wiggle" aria-hidden="true">😜</div>
+    <h2 id="jk-title" data-i18n="jkTitle">jk just have a good time</h2>
+    <button type="button" class="gag-close" id="jk-close" data-i18n="jkClose">Phew 😮‍💨</button>
   </dialog>
 </body>
 </html>

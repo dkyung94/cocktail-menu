@@ -256,15 +256,22 @@ body {
 }
 
 /* ==========================================================================
-   "Request Bartender" button + modal
+   Footer prank buttons + modals ("Request Bartender", "Pay Tab")
    ========================================================================== */
-.bartender-btn {
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.footer-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   min-height: 44px;
-  margin-top: 1.25rem;
-  padding: 0.6rem 1.3rem;
+  padding: 0.6rem 1.2rem;
   border: 1.5px solid var(--color-accent);
   border-radius: 999px;
   background: transparent;
@@ -277,17 +284,19 @@ body {
   transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
-.bartender-btn:active {
+.footer-btn:active {
   transform: scale(0.96);
 }
 
-.bartender-btn:focus-visible,
-.bartender-close:focus-visible {
+.footer-btn:focus-visible,
+.gag-close:focus-visible,
+.pay-btn:focus-visible,
+.receipt-x:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
-.bartender-btn.is-calling {
+.footer-btn.is-calling {
   background: var(--color-tag-bg);
   cursor: progress;
 }
@@ -296,7 +305,7 @@ body {
   display: inline-block;
 }
 
-.bartender-dialog {
+.gag-dialog {
   width: min(20rem, calc(100vw - 2.5rem));
   margin: auto;
   padding: 2rem 1.5rem 1.75rem;
@@ -308,18 +317,19 @@ body {
   box-shadow: 0 20px 50px rgb(0 0 0 / 0.25);
 }
 
-.bartender-dialog::backdrop {
+.gag-dialog::backdrop,
+.receipt-dialog::backdrop {
   background: rgb(42 31 26 / 0.5);
   backdrop-filter: blur(2px);
 }
 
-.bartender-emoji {
+.gag-emoji {
   display: inline-block;
   font-size: 3rem;
   line-height: 1;
 }
 
-.bartender-dialog h2 {
+.gag-dialog h2 {
   margin-top: 0.75rem;
   font-family: var(--font-heading);
   font-weight: 600;
@@ -328,13 +338,13 @@ body {
   color: var(--color-accent);
 }
 
-.bartender-sub {
+.gag-sub {
   margin-top: 0.4rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--color-muted);
 }
 
-.bartender-close {
+.gag-close {
   min-height: 44px;
   margin-top: 1.5rem;
   padding: 0.6rem 1.6rem;
@@ -346,6 +356,178 @@ body {
   font-weight: 600;
   color: var(--color-bg);
   cursor: pointer;
+}
+
+/* ---- Prank receipt: always white paper, like a real one ---- */
+.receipt-dialog {
+  --paper: #fffdf7;
+  --ink: #1f1f1f;
+  --ink-muted: #5c5c5c;
+  width: min(22rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0 0 14px;  /* room for the torn edge */
+  overflow-y: auto;
+  border: 0;
+  background: transparent;
+}
+
+.receipt {
+  position: relative;
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: left;
+  filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.3));
+}
+
+/* Torn zig-zag bottom edge */
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 10px;
+  background:
+    linear-gradient(135deg, var(--paper) 50%, transparent 50%) 0 0 / 12px 10px repeat-x,
+    linear-gradient(225deg, var(--paper) 50%, transparent 50%) 0 0 / 12px 10px repeat-x;
+}
+
+.receipt-x {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.r-head {
+  text-align: center;
+}
+
+.r-head h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.r-head p {
+  color: var(--ink-muted);
+}
+
+.r-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.r-row span:last-child {
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.r-rule {
+  margin: 0.6rem 0;
+  border-top: 1px dashed #9a9a9a;
+}
+
+.r-rule.double {
+  border-top: 3px double var(--ink);
+}
+
+.r-total {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.r-note {
+  margin-top: 0.5rem;
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+}
+
+.r-barcode {
+  margin: 1rem 0 0.2rem;
+}
+
+.r-barcode svg {
+  display: block;
+  width: 100%;
+  height: 44px;
+  fill: var(--ink);
+}
+
+.r-barcode-num,
+.r-thanks {
+  text-align: center;
+}
+
+.r-barcode-num {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+}
+
+.r-thanks {
+  margin-top: 0.6rem;
+  font-weight: 700;
+}
+
+.receipt-pay {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.pay-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pay-apple {
+  border: 0;
+  background: #000;
+  color: #fff;
+}
+
+.pay-cash {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+}
+
+.pay-btn:disabled {
+  opacity: 0.8;
+  cursor: progress;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
 }
 
 /* ==========================================================================
@@ -422,20 +604,45 @@ html:lang(ko) .drink-tag {
 
   /* Bartender gag: bell rings while "calling", card bounces in,
      finger hops upward, title shakes its head "no" */
-  .bartender-btn.is-calling .bell {
+  .footer-btn.is-calling .bell {
     animation: bell-ring 0.35s ease-in-out infinite;
   }
-  .bartender-dialog[open] {
+  .gag-dialog[open] {
     animation: pop-in 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
   }
-  .bartender-dialog[open]::backdrop {
+  .gag-dialog[open]::backdrop,
+  .receipt-dialog[open]::backdrop {
     animation: fade 0.3s ease both;
   }
-  .bartender-dialog[open] .bartender-emoji {
+  .gag-dialog[open] .gag-emoji.hop {
     animation: hop-up 0.7s ease-in-out 0.4s infinite;
   }
-  .bartender-dialog[open] h2 {
+  .gag-dialog[open] .gag-emoji.wiggle {
+    animation: wiggle 0.9s ease-in-out 0.3s infinite;
+  }
+  .gag-dialog.shake[open] h2 {
     animation: head-shake 0.7s ease-in-out 0.45s both;
+  }
+
+  /* Receipt feeds out of the "printer" top-down */
+  .receipt-dialog[open] .receipt {
+    animation: print-out 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) both;
+  }
+  .spinner {
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes print-out {
+    from { clip-path: inset(0 0 100% 0); transform: translateY(-30px); }
+    to   { clip-path: inset(-40px); transform: none; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-14deg) scale(1.08); }
+    75% { transform: rotate(14deg) scale(1.08); }
   }
 
   @keyframes bell-ring {
