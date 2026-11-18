@@ -26,7 +26,7 @@ const MENU = {
         },
         {
           name: "Cider Effects",
-          ingredients: ["Soju", "Apple cider", "Lemon", "Cinnamon stick"],
+          ingredients: ["Soju", "Apple cider", "Lemon"],
           description: "Perfect for the Sweater Season.",
         },
         {

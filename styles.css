@@ -1,19 +1,34 @@
 /* ==========================================================================
    Design tokens: change these to re-theme the whole menu.
+   Light = oat cream & espresso. Dark (phones in dark mode) = espresso & cream.
    ========================================================================== */
 :root {
-  --color-bg: #fff4f1;       /* blush cream */
-  --color-text: #2a2433;
-  --color-muted: #6e6577;    /* ingredients, tagline */
-  --color-accent: #13784f;   /* soju-bottle green (drink names, title) */
-  --color-pop: #ff6fa5;      /* pink, decoration only (not for small text) */
-  --color-mint: #b9f0d7;     /* background blob */
-  --color-blush: #ffd1e3;    /* background blob */
-  --color-tag-bg: var(--color-pop);
-  --color-tag-text: #fff;
+  --color-bg: #f5ecdf;        /* oat cream */
+  --color-bg-edge: #ecdfcc;   /* slightly deeper cream for the soft vignette */
+  --color-text: #3b2a20;      /* espresso brown, softer than black */
+  --color-muted: #75604f;     /* ingredients, tagline */
+  --color-accent: #a4462a;    /* rust (drink names) */
+  --color-ornament: #c08a3e;  /* amber, decoration only (not for small text) */
+  --color-rule: #d9c7af;      /* thin lines */
+  --color-tag-bg: #ead9c0;
+  --color-tag-text: #6b3a22;
 
-  --font-heading: "Bagel Fat One", system-ui, sans-serif;
-  --font-body: "Nunito", system-ui, sans-serif;
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #2a1f1a;      /* espresso */
+    --color-bg-edge: #21180f;
+    --color-text: #efe3d2;    /* warm cream */
+    --color-muted: #bba88f;
+    --color-accent: #e39a6b;  /* soft terracotta */
+    --color-ornament: #c9974f;
+    --color-rule: #4a3a2e;
+    --color-tag-bg: #4a3428;
+    --color-tag-text: #f0c9a8;
+  }
 }
 
 /* ==========================================================================
@@ -51,9 +66,8 @@ ol {
    ========================================================================== */
 html {
   background-color: var(--color-bg);
-  background-image:
-    radial-gradient(circle at 0% 0%, var(--color-blush) 0, transparent 45vmax),
-    radial-gradient(circle at 100% 100%, var(--color-mint) 0, transparent 45vmax);
+  /* very soft vignette, like candlelight falling off at the edges */
+  background-image: radial-gradient(ellipse at 50% 30%, var(--color-bg) 55%, var(--color-bg-edge) 100%);
   background-attachment: fixed;
 }
 
@@ -61,9 +75,10 @@ body {
   min-height: 100vh;
   max-width: 40rem;  /* readable line length on larger screens */
   margin: 0 auto;
-  padding: 3rem 1.25rem 2.5rem;
-  line-height: 1.5;
+  padding: 3.5rem 1.25rem 3rem;
   font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
   color: var(--color-text);
   text-align: center;
 }
@@ -72,23 +87,23 @@ body {
    Header
    ========================================================================== */
 .site-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .site-header h1 {
   font-family: var(--font-heading);
-  font-weight: 400;
-  font-size: clamp(2.5rem, 12vw, 4rem);
-  line-height: 1.05;
-  color: var(--color-accent);
-  text-shadow: 3px 3px 0 var(--color-pop);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(2.4rem, 11vw, 3.5rem);
+  line-height: 1.1;
+  color: var(--color-text);
 }
 
 .tagline {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
@@ -100,44 +115,51 @@ body {
   margin-top: 3rem;
 }
 
+/* Section title between two thin rules: ——— Cocktails ——— */
 .menu-section-title {
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 1.5rem;
-  letter-spacing: 0.08em;
+  font-size: 1.15rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--color-muted);
 }
 
 .menu-section-title::before,
 .menu-section-title::after {
-  content: "~";
-  margin: 0 0.5em;
-  color: var(--color-pop);
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-rule);
 }
 
+/* Small amber ornament between drinks */
 .drink + .drink::before {
-  content: "✦";
+  content: "❦";
   display: block;
-  margin: 1.75rem 0;
-  font-size: 1rem;
-  color: var(--color-pop);
+  margin: 1.6rem 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-ornament);
 }
 
 .drink-name {
   font-family: var(--font-heading);
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 1.2;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1.25;
   color: var(--color-accent);
 }
 
 .drink-ingredients {
-  margin-top: 0.4rem;
-  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--color-muted);
 }
 
@@ -147,25 +169,28 @@ body {
 
 .drink-ingredients li + li::before {
   content: " · ";
-  color: var(--color-pop);
 }
 
 .drink-description {
   max-width: 28rem;
-  margin: 0.5rem auto 0;
+  margin: 0.45rem auto 0;
+  font-family: var(--font-heading);
+  font-style: italic;
 }
 
 /* Optional tag pill (add `tag: "..."` to a drink in menu.js) */
 .drink-tag {
   display: inline-block;
   margin-left: 0.35em;
-  padding: 0.15em 0.6em;
+  padding: 0.15em 0.65em;
   border-radius: 999px;
   vertical-align: middle;
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   background: var(--color-tag-bg);
   color: var(--color-tag-text);
 }
@@ -175,7 +200,10 @@ body {
    ========================================================================== */
 .site-footer {
   margin-top: 3rem;
-  font-weight: 700;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-family: var(--font-heading);
+  font-style: italic;
   color: var(--color-muted);
 }
 
@@ -184,11 +212,11 @@ body {
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   .menu {
-    animation: fade-up 0.6s ease-out both;
+    animation: fade-in 0.8s ease-out both;
   }
 
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 }
