@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Design tokens — uncomment and fill in when you design the site.
+   ========================================================================== */
+:root {
+  /* --color-bg: ; */
+  /* --color-text: ; */
+  /* --color-muted: ; */
+  /* --color-accent: ; */
+  /* --color-tag-bg: ; */
+  /* --color-tag-text: ; */
+
+  /* --font-body: ; */
+  /* --font-heading: ; */
+}
+
+/* ==========================================================================
+   Minimal reset
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ==========================================================================
+   Base layout (mobile-first)
+   ========================================================================== */
+body {
+  min-height: 100vh;
+  max-width: 40rem;  /* readable line length on larger screens */
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Your styles go below.
+   Class hooks rendered by menu.js:
+     .menu-section, .menu-section-title, .drink-list,
+     .drink, .drink-name, .drink-tag, .drink-description, .drink-ingredients
+   ========================================================================== */
