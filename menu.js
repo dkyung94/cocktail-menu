@@ -6,29 +6,38 @@
 const MENU = {
   sections: [
     {
-      title: "[Section title, e.g. Signatures]",
+      title: "Cocktails",
       drinks: [
         {
-          name: "[Placeholder Drink One]",
-          ingredients: ["Ingredient A", "Ingredient B", "Ingredient C"],
-          description: "[Short description of the drink.]",
-          tag: "Signature",
+          name: "Blood, Sweat & Soju",
+          ingredients: ["Soju", "Lorina sparkling blood orange", "Lime"],
+          description: "Bright, tart, and a little bittersweet.",
         },
         {
-          name: "[Placeholder Drink Two]",
-          ingredients: ["Ingredient A", "Ingredient D"],
-          description: "[Short description of the drink.]",
+          name: "When Life Gives You Soju",
+          ingredients: ["Soju", "French sparkling lemonade"],
+          description: "Crisp and refreshing, the easy one to keep sipping.",
         },
-      ],
-    },
-    {
-      title: "[Section title, e.g. Zero-proof]",
-      drinks: [
         {
-          name: "[Placeholder Mocktail]",
-          ingredients: ["Ingredient E", "Ingredient F"],
-          description: "[Short description of the drink.]",
-          tag: "Zero-proof",
+          name: "Espresso Yo Self",
+          ingredients: ["Soju", "Cold brew", "Latte"],
+          description:
+            "Shaken and topped with a creamy layer of latte. Your nightcap and your morning coffee in one glass.",
+        },
+        {
+          name: "Cider Effects",
+          ingredients: ["Soju", "Apple cider", "Lemon", "Cinnamon stick"],
+          description: "Perfect for the Sweater Season.",
+        },
+        {
+          name: "Soju-gria",
+          ingredients: ["Red wine", "Soju", "Fresh oranges", "Apples", "Sparkling blood orange"],
+          description: "Fruity and dangerously easy to drink.",
+        },
+        {
+          name: "Piña Seoulada",
+          ingredients: ["Soju", "Pineapple", "Coconut water", "Sparkling lemonade"],
+          description: "Light and tropical.",
         },
       ],
     },
@@ -60,8 +69,8 @@ function renderDrink(drink) {
   return `
     <li class="drink">
       <h3 class="drink-name">${escapeHTML(drink.name)} ${tag}</h3>
-      <p class="drink-description">${escapeHTML(drink.description)}</p>
       <ul class="drink-ingredients" aria-label="Ingredients">${ingredients}</ul>
+      <p class="drink-description">${escapeHTML(drink.description)}</p>
     </li>`;
 }
 

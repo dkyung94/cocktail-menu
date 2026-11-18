@@ -1,16 +1,19 @@
 /* ==========================================================================
-   Design tokens — uncomment and fill in when you design the site.
+   Design tokens: change these to re-theme the whole menu.
    ========================================================================== */
 :root {
-  /* --color-bg: ; */
-  /* --color-text: ; */
-  /* --color-muted: ; */
-  /* --color-accent: ; */
-  /* --color-tag-bg: ; */
-  /* --color-tag-text: ; */
+  --color-bg: #fff4f1;       /* blush cream */
+  --color-text: #2a2433;
+  --color-muted: #6e6577;    /* ingredients, tagline */
+  --color-accent: #13784f;   /* soju-bottle green (drink names, title) */
+  --color-pop: #ff6fa5;      /* pink, decoration only (not for small text) */
+  --color-mint: #b9f0d7;     /* background blob */
+  --color-blush: #ffd1e3;    /* background blob */
+  --color-tag-bg: var(--color-pop);
+  --color-tag-text: #fff;
 
-  /* --font-body: ; */
-  /* --font-heading: ; */
+  --font-heading: "Bagel Fat One", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
 }
 
 /* ==========================================================================
@@ -46,17 +49,146 @@ ol {
 /* ==========================================================================
    Base layout (mobile-first)
    ========================================================================== */
+html {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 0% 0%, var(--color-blush) 0, transparent 45vmax),
+    radial-gradient(circle at 100% 100%, var(--color-mint) 0, transparent 45vmax);
+  background-attachment: fixed;
+}
+
 body {
   min-height: 100vh;
   max-width: 40rem;  /* readable line length on larger screens */
   margin: 0 auto;
-  padding: 1rem;
+  padding: 3rem 1.25rem 2.5rem;
   line-height: 1.5;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  text-align: center;
 }
 
 /* ==========================================================================
-   Your styles go below.
-   Class hooks rendered by menu.js:
-     .menu-section, .menu-section-title, .drink-list,
-     .drink, .drink-name, .drink-tag, .drink-description, .drink-ingredients
+   Header
    ========================================================================== */
+.site-header {
+  margin-bottom: 2.5rem;
+}
+
+.site-header h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 12vw, 4rem);
+  line-height: 1.05;
+  color: var(--color-accent);
+  text-shadow: 3px 3px 0 var(--color-pop);
+}
+
+.tagline {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ==========================================================================
+   Menu
+   ========================================================================== */
+.menu-section + .menu-section {
+  margin-top: 3rem;
+}
+
+.menu-section-title {
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menu-section-title::before,
+.menu-section-title::after {
+  content: "~";
+  margin: 0 0.5em;
+  color: var(--color-pop);
+}
+
+.drink + .drink::before {
+  content: "✦";
+  display: block;
+  margin: 1.75rem 0;
+  font-size: 1rem;
+  color: var(--color-pop);
+}
+
+.drink-name {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.drink-ingredients {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.drink-ingredients li {
+  display: inline;
+}
+
+.drink-ingredients li + li::before {
+  content: " · ";
+  color: var(--color-pop);
+}
+
+.drink-description {
+  max-width: 28rem;
+  margin: 0.5rem auto 0;
+}
+
+/* Optional tag pill (add `tag: "..."` to a drink in menu.js) */
+.drink-tag {
+  display: inline-block;
+  margin-left: 0.35em;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  vertical-align: middle;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  margin-top: 3rem;
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .menu {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
