@@ -17,7 +17,7 @@
   // ---- Reveal drinks and footer as they scroll into view ------------------
   // Anything whose top is above ~92% of the screen gets revealed, including
   // things already scrolled past, so a fast flick can never leave a drink hidden.
-  const pending = new Set(document.querySelectorAll(".drink, .site-footer"));
+  let pending = new Set();
   document.documentElement.classList.add("anim-ready");
 
   function revealInView() {
@@ -47,9 +47,16 @@
     });
   }
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-  revealInView();
+  function trackReveal() {
+    pending = new Set(document.querySelectorAll(".drink:not(.is-visible), .site-footer:not(.is-visible)"));
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    revealInView();
+  }
+
+  trackReveal();
+  // menu.js re-renders the drinks when the language is switched.
+  document.addEventListener("menu:rendered", trackReveal);
 
   // ---- Falling leaves ------------------------------------------------------
   const LEAF_SHAPES = [

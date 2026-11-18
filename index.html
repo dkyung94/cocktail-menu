@@ -12,27 +12,44 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Nunito+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&family=Nunito+Sans:wght@400;600&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap">
 
   <link rel="stylesheet" href="styles.css">
   <script src="menu.js" defer></script>
   <script src="effects.js" defer></script>
+  <script src="bartender.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <h1>Girls' Night Bar</h1>
-    <p class="tagline">Pick your poison</p>
+    <div class="lang-toggle" role="group" aria-label="Language / 언어">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+    </div>
+    <!-- Text for elements with data-i18n lives in the UI object in menu.js -->
+    <h1 data-i18n="title">Girls' Night Bar</h1>
+    <p class="tagline" data-i18n="tagline">Pick your poison</p>
   </header>
 
   <main>
     <!-- Menu is rendered here by menu.js from the MENU data object. -->
-    <section id="menu" class="menu" aria-label="Cocktail menu">
+    <section id="menu" class="menu" aria-label="Cocktail menu" data-i18n-aria="menuLabel">
       <noscript>Please enable JavaScript to see the menu.</noscript>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Cheers! 🥂</p>
+    <p data-i18n="footer">Cheers! 🥂</p>
+    <button type="button" class="bartender-btn" id="bartender-btn">
+      <span class="bell" aria-hidden="true">🛎️</span>
+      <span class="bartender-label" data-i18n="bartenderButton">Request Bartender</span>
+    </button>
   </footer>
+
+  <dialog class="bartender-dialog" id="bartender-dialog" aria-labelledby="bartender-title">
+    <div class="bartender-emoji" aria-hidden="true">👆</div>
+    <h2 id="bartender-title" data-i18n="bartenderTitle">Go up yourself bro</h2>
+    <p class="bartender-sub" data-i18n="bartenderSub">The bartender is off the clock.</p>
+    <button type="button" class="bartender-close" id="bartender-close" data-i18n="bartenderClose">Fine 🙄</button>
+  </dialog>
 </body>
 </html>
