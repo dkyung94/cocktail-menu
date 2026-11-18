@@ -9,6 +9,12 @@ const MENU = {
       title: "Cocktails",
       drinks: [
         {
+          name: "Cider Effects",
+          ingredients: ["Soju", "Apple cider", "Lemon"],
+          description: "Perfect for the Sweater Season.",
+          tag: "Seasonal",
+        },
+        {
           name: "Blood, Sweat & Soju",
           ingredients: ["Soju", "Lorina sparkling blood orange", "Lime"],
           description: "Bright, tart, and a little bittersweet.",
@@ -20,23 +26,13 @@ const MENU = {
         },
         {
           name: "Espresso Yo Self",
-          ingredients: ["Soju", "Cold brew", "Latte"],
+          ingredients: ["Soju", "Cold brew", "Oat latte"],
           description:
             "Shaken and topped with a creamy layer of latte. Your nightcap and your morning coffee in one glass.",
         },
         {
-          name: "Cider Effects",
-          ingredients: ["Soju", "Apple cider", "Lemon"],
-          description: "Perfect for the Sweater Season.",
-        },
-        {
-          name: "Soju-gria",
-          ingredients: ["Red wine", "Soju", "Fresh oranges", "Apples", "Sparkling blood orange"],
-          description: "Fruity and dangerously easy to drink.",
-        },
-        {
-          name: "Piña Seoulada",
-          ingredients: ["Soju", "Pineapple", "Coconut water", "Sparkling lemonade"],
+          name: "Piña Sojulada",
+          ingredients: ["Soju", "Pineapple Coconut water", "Sparkling lemonade"],
           description: "Light and tropical.",
         },
       ],

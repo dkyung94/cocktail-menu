@@ -13,6 +13,12 @@
   --color-tag-bg: #ead9c0;
   --color-tag-text: #6b3a22;
 
+  /* falling leaves */
+  --leaf-1: #b5532f;  /* rust */
+  --leaf-2: #cf8a35;  /* amber */
+  --leaf-3: #8c3b2c;  /* burgundy brown */
+  --leaf-4: #d6a14a;  /* gold */
+
   --font-heading: "Fraunces", Georgia, serif;
   --font-body: "Nunito Sans", system-ui, sans-serif;
 }
@@ -28,6 +34,10 @@
     --color-rule: #4a3a2e;
     --color-tag-bg: #4a3428;
     --color-tag-text: #f0c9a8;
+    --leaf-1: #c8693f;
+    --leaf-2: #d39a4c;
+    --leaf-3: #a24a35;
+    --leaf-4: #e0b25c;
   }
 }
 
@@ -208,15 +218,116 @@ body {
 }
 
 /* ==========================================================================
-   Motion
+   Motion (all of it is skipped when the phone asks for reduced motion)
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
-  .menu {
-    animation: fade-in 0.8s ease-out both;
+  /* Header drifts in on load */
+  .site-header h1 {
+    animation: drift-down 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .tagline {
+    animation: drift-down 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+  }
+  .menu-section-title {
+    animation: fade 0.8s ease 0.4s both;
+  }
+  .menu-section-title::before,
+  .menu-section-title::after {
+    animation: rule-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s both;
+  }
+  .menu-section-title::before { transform-origin: right; }
+  .menu-section-title::after  { transform-origin: left; }
+
+  /* Drinks + footer fade up as they scroll into view (effects.js adds the classes) */
+  .anim-ready .drink,
+  .anim-ready .site-footer {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s ease var(--reveal-delay, 0ms),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+  }
+  .anim-ready .drink.is-visible,
+  .anim-ready .site-footer.is-visible {
+    opacity: 1;
+    transform: none;
   }
 
-  @keyframes fade-in {
+  /* The ❦ between drinks spins into place */
+  .anim-ready .drink.is-visible::before {
+    animation: ornament-pop 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) calc(var(--reveal-delay, 0ms) + 0.15s) both;
+  }
+
+  /* Tags (e.g. "Seasonal") give a little wiggle every few seconds */
+  .drink-tag {
+    animation: tag-wiggle 6s ease-in-out 1.2s infinite;
+  }
+
+  /* "Cheers!" clinks when it appears */
+  .anim-ready .site-footer.is-visible p {
+    animation: clink 0.8s ease calc(var(--reveal-delay, 0ms) + 0.4s) both;
+  }
+
+  @keyframes drift-down {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
     from { opacity: 0; }
     to   { opacity: 1; }
+  }
+  @keyframes rule-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes ornament-pop {
+    from { opacity: 0; transform: scale(0.3) rotate(-90deg); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes tag-wiggle {
+    0%, 12%, 100% { transform: rotate(0); }
+    3%  { transform: rotate(-7deg); }
+    6%  { transform: rotate(6deg); }
+    9%  { transform: rotate(-3deg); }
+  }
+  @keyframes clink {
+    0%, 100% { transform: rotate(0); }
+    30% { transform: rotate(-5deg) scale(1.06); }
+    60% { transform: rotate(4deg); }
+  }
+
+  /* ---- Falling leaves (created by effects.js) ---- */
+  .leaf-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .leaf {
+    position: absolute;
+    top: calc(var(--size) * -1.5);
+    left: var(--x);
+    width: var(--size);
+    height: var(--size);
+    opacity: 0;
+    will-change: transform;
+    animation: leaf-fall var(--dur) linear var(--delay) both;
+  }
+  .leaf svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: leaf-sway calc(var(--dur) / 3) ease-in-out var(--delay) infinite alternate;
+  }
+  @keyframes leaf-fall {
+    0%   { opacity: 0; transform: translate3d(0, 0, 0) rotate(0); }
+    8%   { opacity: 0.9; }
+    85%  { opacity: 0.9; }
+    100% { opacity: 0; transform: translate3d(0, calc(100vh + 4rem), 0) rotate(var(--spin)); }
+  }
+  @keyframes leaf-sway {
+    from { transform: translateX(calc(var(--sway) * -1)) rotate(-25deg); }
+    to   { transform: translateX(var(--sway)) rotate(30deg); }
   }
 }
