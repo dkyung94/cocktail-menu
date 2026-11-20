@@ -10,8 +10,8 @@
 const MENU = {
   sections: [
     {
-      title: "Cocktails",
-      ko: { title: "칵테일" },
+      title: "Soju Cocktails",
+      ko: { title: "소주 칵테일" },
       drinks: [
         {
           name: "Cider Effects",
@@ -116,20 +116,6 @@ const UI = {
       "Great choice. You're welcome.",
     ],
 
-    // ---- fun.js: Soju-meter ({n} = number of drinks) ----
-    sipLabel: "I had one",
-    meterCount: "{n} tonight",
-    meterUndo: "Oops, undo one",
-    meterZero: "Fresh start ✨",
-    meterMilestones: {
-      1: "First one's always the best 🥂",
-      3: "You're now fluent in Korean 🇰🇷",
-      4: "Time for some 부대찌개 🍲",
-      5: "Hydrate, queen 💧",
-      7: "The bartender is watching you 👀",
-      10: "Legend. Water. Now.",
-    },
-
     // ---- fun.js: Fortune soju cap ----
     fortuneButton: "Twist for a fortune",
     fortuneHeading: "Your soju fortune",
@@ -196,19 +182,6 @@ const UI = {
       "믿고 마셔 봐요.",
       "탁월한 선택. 천만에요.",
     ],
-
-    sipLabel: "한 잔 마셨어요",
-    meterCount: "오늘 {n}잔",
-    meterUndo: "앗, 하나 취소",
-    meterZero: "다시 시작 ✨",
-    meterMilestones: {
-      1: "첫 잔이 제일 맛있죠 🥂",
-      3: "이제 영어도 술술 나와요 🇺🇸",
-      4: "부대찌개 먹을 타이밍 🍲",
-      5: "물도 좀 마셔요 💧",
-      7: "바텐더가 지켜보고 있어요 👀",
-      10: "레전드. 이제 물. 당장.",
-    },
 
     fortuneButton: "뚜껑 따고 운세 보기",
     fortuneHeading: "오늘의 소주 운세",
