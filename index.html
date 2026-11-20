@@ -18,6 +18,7 @@
   <script src="menu.js" defer></script>
   <script src="effects.js" defer></script>
   <script src="pranks.js" defer></script>
+  <script src="fun.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -28,6 +29,7 @@
     <!-- Text for elements with data-i18n lives in the UI object in menu.js -->
     <h1 data-i18n="title">Girls' Night Bar</h1>
     <p class="tagline" data-i18n="tagline">Pick your poison</p>
+    <button type="button" class="pick-btn" id="pick-btn" data-i18n="pickButton">🎲 Can't decide?</button>
   </header>
 
   <main>
@@ -39,6 +41,10 @@
 
   <footer class="site-footer">
     <p data-i18n="footer">Cheers! 🥂</p>
+    <button type="button" class="fortune-btn" id="fortune-btn">
+      <span class="cap" aria-hidden="true">🍶</span>
+      <span data-i18n="fortuneButton">Twist for a fortune</span>
+    </button>
     <div class="footer-actions">
       <button type="button" class="footer-btn" id="bartender-btn">
         <span class="bell" aria-hidden="true">🛎️</span>
@@ -54,7 +60,7 @@
   <!-- Prank modals (behavior in pranks.js, text in the UI object in menu.js) -->
   <dialog class="gag-dialog shake" id="bartender-dialog" aria-labelledby="bartender-title">
     <div class="gag-emoji hop" aria-hidden="true">👆</div>
-    <h2 id="bartender-title" data-i18n="bartenderTitle">Go up yourself bro</h2>
+    <h2 id="bartender-title" data-i18n="bartenderTitle">Go up yourself :)</h2>
     <p class="gag-sub" data-i18n="bartenderSub">Don't be shy</p>
     <button type="button" class="gag-close" id="bartender-close" data-i18n="bartenderClose">Fine 🙄</button>
   </dialog>
@@ -75,5 +81,31 @@
     <h2 id="jk-title" data-i18n="jkTitle">jk just have a good time</h2>
     <button type="button" class="gag-close" id="jk-close" data-i18n="jkClose">Phew 😮‍💨</button>
   </dialog>
+
+  <!-- Fun extras (behavior in fun.js, text in the UI object in menu.js) -->
+  <dialog class="gag-dialog" id="fortune-dialog" aria-labelledby="fortune-text">
+    <div class="gag-emoji wiggle" aria-hidden="true">🥠</div>
+    <p class="gag-sub fortune-heading" data-i18n="fortuneHeading">Your soju fortune</p>
+    <h2 id="fortune-text" class="fortune-text"></h2>
+    <div class="gag-actions">
+      <button type="button" class="gag-close secondary" id="fortune-again" data-i18n="fortuneAgain">Another one</button>
+      <button type="button" class="gag-close" id="fortune-close" autofocus data-i18n="fortuneClose">Cheers 🥂</button>
+    </div>
+  </dialog>
+
+  <dialog class="gag-dialog" id="meter-dialog" aria-labelledby="meter-title">
+    <div class="gag-emoji" aria-hidden="true">🍶</div>
+    <h2 id="meter-title"></h2>
+    <p class="gag-sub" id="meter-line"></p>
+    <div class="gag-actions">
+      <button type="button" class="gag-close secondary" id="meter-undo" data-i18n="meterUndo">Oops, undo one</button>
+      <button type="button" class="gag-close" id="meter-close" autofocus data-i18n="close">Close</button>
+    </div>
+  </dialog>
+
+  <button type="button" class="meter-badge" id="meter-badge" hidden>
+    <span aria-hidden="true">🍶</span> <span id="meter-count">0</span>
+  </button>
+  <div class="fun-toast" id="fun-toast" role="status" aria-live="polite"></div>
 </body>
 </html>

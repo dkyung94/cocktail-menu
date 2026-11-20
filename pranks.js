@@ -1,6 +1,6 @@
 // ==========================================================================
 // Footer pranks:
-//   1. "Request Bartender" → fake call → "Go up yourself bro"
+//   1. "Request Bartender" → fake call → "Go up yourself :)"
 //   2. "Pay Tab" → a very official receipt → fake payment → "jk"
 // Text for each language lives in the UI object in menu.js.
 // ==========================================================================

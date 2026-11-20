@@ -531,6 +531,181 @@ body {
 }
 
 /* ==========================================================================
+   Fun extras (fun.js): "Can't decide?", Soju-meter, Fortune soju cap
+   ========================================================================== */
+.pick-btn,
+.sip-btn,
+.fortune-btn,
+.meter-badge {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pick-btn:focus-visible,
+.sip-btn:focus-visible,
+.fortune-btn:focus-visible,
+.meter-badge:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* "🎲 Can't decide?" under the tagline */
+.pick-btn {
+  min-width: 13rem;
+  min-height: 40px;
+  margin-top: 1.1rem;
+  padding: 0.45rem 1.1rem;
+  border: 1.5px solid var(--color-rule);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.pick-btn:active { transform: scale(0.96); }
+.pick-btn.is-spinning {
+  background: var(--color-tag-bg);
+  cursor: progress;
+}
+
+/* Wrapper around each drink so it can be highlighted (the ❦ stays outside) */
+.drink-body {
+  margin: -0.75rem;
+  padding: 0.75rem;
+  border-radius: 18px;
+  transition: background-color 0.12s ease, box-shadow 0.3s ease;
+}
+.drink.is-picking .drink-body,
+.drink.is-picked .drink-body {
+  background: var(--color-tag-bg);
+}
+.drink.is-picked .drink-body {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* "+1 🍶" under each drink */
+.sip-btn {
+  min-height: 34px;
+  margin-top: 0.6rem;
+  padding: 0.25rem 0.85rem;
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+.sip-btn:active { background: var(--color-tag-bg); }
+
+/* Running count, bottom-right corner */
+.meter-badge {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 20;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-bg);
+  font-size: 1rem;
+  color: var(--color-accent);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+}
+.meter-badge[hidden] { display: none; }
+/* Room at the bottom so the badge never covers the footer buttons */
+body.has-meter { padding-bottom: 6rem; }
+
+/* Little message at the bottom */
+.fun-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  z-index: 20;
+  width: max-content;
+  max-width: calc(100vw - 2.5rem);
+  padding: 0.6rem 1.1rem;
+  border-radius: 14px;
+  background: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-bg);
+  text-align: center;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+  opacity: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.fun-toast.is-shown { opacity: 1; }
+
+/* Bottle cap with a crimped edge */
+.fortune-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 0;
+  background: transparent;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+.cap {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  /* inner ring + solid cap + little teeth around the edge */
+  background:
+    radial-gradient(circle closest-side, rgb(255 255 255 / 0.2) 0 64%, transparent 66%),
+    radial-gradient(circle closest-side, var(--color-accent) 0 84%, transparent 85%),
+    repeating-conic-gradient(var(--color-accent) 0 7.5deg, transparent 7.5deg 15deg);
+  filter: drop-shadow(0 3px 4px rgb(0 0 0 / 0.2));
+}
+
+/* Two buttons side by side in a modal */
+.gag-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.gag-actions .gag-close {
+  margin-top: 0;
+  padding-inline: 1.1rem;
+}
+.gag-close.secondary {
+  border: 1.5px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+}
+.gag-close:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.fortune-heading {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.gag-dialog h2.fortune-text {
+  margin-top: 0.5rem;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
    Korean adjustments
    ========================================================================== */
 html:lang(ko) body {
@@ -547,7 +722,8 @@ html:lang(ko) .site-footer {
 /* Wide letter-spacing splits Korean words apart ("칵 테 일"), so tighten it */
 html:lang(ko) .tagline,
 html:lang(ko) .menu-section-title,
-html:lang(ko) .drink-tag {
+html:lang(ko) .drink-tag,
+html:lang(ko) .fortune-heading {
   letter-spacing: 0.04em;
 }
 
@@ -630,6 +806,46 @@ html:lang(ko) .drink-tag {
   }
   .spinner {
     animation: spin 0.7s linear infinite;
+  }
+
+  /* Fun extras */
+  .pick-btn {
+    animation: drift-down 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+  }
+  .drink.is-picked .drink-body {
+    animation: picked-glow 1.1s ease-out 3;
+  }
+  .sip-btn.is-clinked {
+    animation: clink 0.5s ease;
+  }
+  .meter-badge.is-bumped {
+    animation: bump 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  .fun-toast {
+    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+    transform: translate(-50%, 12px);
+  }
+  .fun-toast.is-shown {
+    transform: translate(-50%, 0);
+  }
+  .fortune-btn.is-twisting .cap {
+    animation: cap-twist 0.65s cubic-bezier(0.5, 0, 0.3, 1);
+  }
+  .fortune-text.is-new {
+    animation: fade 0.45s ease;
+  }
+
+  @keyframes picked-glow {
+    from { box-shadow: 0 0 0 2px var(--color-accent), 0 0 0 2px var(--color-accent); }
+    to   { box-shadow: 0 0 0 2px var(--color-accent), 0 0 0 14px transparent; }
+  }
+  @keyframes bump {
+    40% { transform: scale(1.18); }
+  }
+  @keyframes cap-twist {
+    0%   { transform: rotate(0) scale(1); }
+    25%  { transform: rotate(-25deg) scale(1.05); }
+    100% { transform: rotate(340deg) scale(1.15) translateY(-6px); opacity: 0.6; }
   }
 
   @keyframes print-out {

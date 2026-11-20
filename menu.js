@@ -35,20 +35,20 @@ const MENU = {
         },
         {
           name: "When Life Gives You Soju",
-          ingredients: ["Soju", "French sparkling lemonade"],
+          ingredients: ["Soju", "French sparkling lemonade", "Mint"],
           description: "Crisp and refreshing, the easy one to keep sipping.",
           ko: {
-            ingredients: ["소주", "프렌치 스파클링 레모네이드"],
+            ingredients: ["소주", "프렌치 스파클링 레모네이드", "민트"],
             description: "깔끔하고 청량해서 자꾸 손이 가는 한 잔.",
           },
         },
         {
           name: "Espresso Yo Self",
-          ingredients: ["Soju", "Cold brew", "Oat latte"],
+          ingredients: ["Soju", "Cold brew", "Oat latte", "Coffee Bean"],
           description:
             "Shaken and topped with a creamy layer of latte. Your nightcap and your morning coffee in one glass.",
           ko: {
-            ingredients: ["소주", "콜드브루", "오트 라떼"],
+            ingredients: ["소주", "콜드브루", "오트 라떼", "커피 원두"],
             description: "셰이크한 뒤 부드러운 라떼를 한 층 올렸어요. 자기 전 한 잔과 모닝커피를 한 잔에.",
           },
         },
@@ -77,7 +77,7 @@ const UI = {
     ingredientsLabel: "Ingredients",
     bartenderButton: "Request Bartender",
     bartenderCalling: "Calling the bartender…",
-    bartenderTitle: "Go up yourself bro",
+    bartenderTitle: "Go up yourself :)",
     bartenderSub: "Don't be shy",
     bartenderClose: "Fine 🙄",
     close: "Close",
@@ -105,6 +105,50 @@ const UI = {
     processing: "Processing…",
     jkTitle: "jk just have a good time",
     jkClose: "Phew 😮‍💨",
+
+    // ---- fun.js: "Pick for me" ----
+    pickButton: "🎲 Can't decide?",
+    pickLines: [
+      "The menu has spoken.",
+      "Fate says this one.",
+      "No take-backs.",
+      "Trust the process.",
+      "Great choice. You're welcome.",
+    ],
+
+    // ---- fun.js: Soju-meter ({n} = number of drinks) ----
+    sipLabel: "I had one",
+    meterCount: "{n} tonight",
+    meterUndo: "Oops, undo one",
+    meterZero: "Fresh start ✨",
+    meterMilestones: {
+      1: "First one's always the best 🥂",
+      3: "You're now fluent in Korean 🇰🇷",
+      4: "Time for some 부대찌개 🍲",
+      5: "Hydrate, queen 💧",
+      7: "The bartender is watching you 👀",
+      10: "Legend. Water. Now.",
+    },
+
+    // ---- fun.js: Fortune soju cap ----
+    fortuneButton: "Twist for a fortune",
+    fortuneHeading: "Your soju fortune",
+    fortuneAgain: "Another one",
+    fortuneClose: "Cheers 🥂",
+    fortunes: [
+      "You will send a risky text tonight. Don't.",
+      "A stranger will compliment your outfit. It's us.",
+      "To friends who know too much.",
+      "Your next drink will taste better than this one.",
+      "Great things are coming. Mostly snacks.",
+      "Tonight's forecast: 100% chance of oversharing.",
+      "You are the main character tonight. Act like it.",
+      "Someone here has a crush. Look around.",
+      "Tomorrow's group chat will be legendary.",
+      "Lucky number: however many drinks you've had.",
+      "Say yes to the next song request.",
+      "Drink water now. Tomorrow-you says thanks.",
+    ],
   },
   ko: {
     pageTitle: "Girls' Night Bar",
@@ -115,7 +159,7 @@ const UI = {
     ingredientsLabel: "재료",
     bartenderButton: "바텐더 호출",
     bartenderCalling: "바텐더 부르는 중…",
-    bartenderTitle: "직접 가세요, 브로",
+    bartenderTitle: "직접 가세요 :)",
     bartenderSub: "쑥스러워하지 마세요",
     bartenderClose: "알겠어 🙄",
     close: "닫기",
@@ -143,6 +187,47 @@ const UI = {
     processing: "결제 중…",
     jkTitle: "장난이야 ㅋㅋ 그냥 즐겁게 놀아요!",
     jkClose: "휴 😮‍💨",
+
+    pickButton: "🎲 고민되세요?",
+    pickLines: [
+      "메뉴의 뜻이에요.",
+      "운명이 골랐어요.",
+      "무르기 없기.",
+      "믿고 마셔 봐요.",
+      "탁월한 선택. 천만에요.",
+    ],
+
+    sipLabel: "한 잔 마셨어요",
+    meterCount: "오늘 {n}잔",
+    meterUndo: "앗, 하나 취소",
+    meterZero: "다시 시작 ✨",
+    meterMilestones: {
+      1: "첫 잔이 제일 맛있죠 🥂",
+      3: "이제 영어도 술술 나와요 🇺🇸",
+      4: "부대찌개 먹을 타이밍 🍲",
+      5: "물도 좀 마셔요 💧",
+      7: "바텐더가 지켜보고 있어요 👀",
+      10: "레전드. 이제 물. 당장.",
+    },
+
+    fortuneButton: "뚜껑 따고 운세 보기",
+    fortuneHeading: "오늘의 소주 운세",
+    fortuneAgain: "하나 더",
+    fortuneClose: "짠 🥂",
+    fortunes: [
+      "오늘 밤, 보내면 안 될 문자를 보내고 싶어질 거예요. 참아요.",
+      "누군가 오늘 옷 예쁘다고 칭찬할 거예요. 바로 우리요.",
+      "너무 많은 걸 알고 있는 친구들을 위하여.",
+      "다음 잔은 이번 잔보다 더 맛있을 거예요.",
+      "좋은 일이 다가오고 있어요. 주로 안주요.",
+      "오늘의 예보: TMI 확률 100%.",
+      "오늘 밤 주인공은 당신. 주인공답게 놀아요.",
+      "여기 누군가 썸 타는 중. 주위를 둘러봐요.",
+      "내일 단톡방 난리 날 예정.",
+      "행운의 숫자: 지금까지 마신 잔 수.",
+      "다음 노래 신청엔 무조건 예스.",
+      "지금 물 한 잔 마시면 내일의 내가 고마워해요.",
+    ],
   },
 };
 
@@ -174,9 +259,11 @@ function renderDrink(drink, lang) {
 
   return `
     <li class="drink">
-      <h3 class="drink-name">${escapeHTML(pickLang(drink, "name", lang))} ${tag}</h3>
-      <ul class="drink-ingredients" aria-label="${escapeHTML(UI[lang].ingredientsLabel)}">${ingredients}</ul>
-      <p class="drink-description">${escapeHTML(pickLang(drink, "description", lang))}</p>
+      <div class="drink-body">
+        <h3 class="drink-name">${escapeHTML(pickLang(drink, "name", lang))} ${tag}</h3>
+        <ul class="drink-ingredients" aria-label="${escapeHTML(UI[lang].ingredientsLabel)}">${ingredients}</ul>
+        <p class="drink-description">${escapeHTML(pickLang(drink, "description", lang))}</p>
+      </div>
     </li>`;
 }
 
